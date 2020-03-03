@@ -4,6 +4,11 @@ public class Point {
     double x = 1;
     double y = 2;
 
+    Point(double xValue, double yValue){
+        x = xValue;
+        y = yValue;
+    }
+
     public double distance(){
         double distance = Math.sqrt(x*x+y*y);
 

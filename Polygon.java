@@ -2,7 +2,7 @@ import java.util.*;
 public class Polygon {
 
     private Point[] points;
-    int numOfPoints = 5;
+    int numOfPoints = 5, pointCount =0;
 
 
     Polygon(int numOfPoints){
@@ -10,17 +10,22 @@ public class Polygon {
     }
 
     public void addPoint(Point p){
-        boolean b = true;
-        int counter = 0;
-        while (b){
-            if (points[counter].getX()!=null){
-
-            }
+        if ((pointCount-1)>=numOfPoints){
+            System.out.println("More points than allocated");
+            return;
         }
+        points[pointCount] = new Point(p.getX(),p.getY());
+        pointCount++;
     }
 
     public double distance(){
         double dist = 0;
+        dist = points[0].distance();
+        for (int i = 0; i < pointCount; i++) {
+            if (points[i].distance()<dist){
+                dist = points[i].distance();
+            }
+        }
         return dist;
     }
 
@@ -28,8 +33,9 @@ public class Polygon {
         double area = 0;
 
         for (int i = 0; i<numOfPoints-2;i++){
-            area = 1/2*((points[i+1].getX()+points[i].getX())*(points[i+1].getY()-points[i].getY()));
+            area = ((points[i+1].getX()+points[i].getX())*(points[i+1].getY()-points[i].getY()));
         }
+        area = 1/2*area;
         return area;
 
     }
