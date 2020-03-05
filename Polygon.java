@@ -35,14 +35,19 @@ public class Polygon {
         for (int i = 0; i<numOfPoints-2;i++){
             area = ((points[i+1].getX()+points[i].getX())*(points[i+1].getY()-points[i].getY()));
         }
-        area = 1/2*area;
+        area = Math.round(1/2*area*100);
+        area = area/100;
         return area;
 
     }
 
     @Override
     public String toString() {
-        String out = "";
+        String out = "[";
+        for (int i =0;i<pointCount;i++){
+            out += points[i].toString() + ", ";
+        }
+        out += "] : " + area();
         return out;
     }
 }
