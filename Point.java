@@ -1,8 +1,8 @@
 import java.util.*;
 import java.lang.Math;
 public class Point {
-    double x = 1;
-    double y = 2;
+    private double x = 1;
+    private double y = 2;
 
     Point(double xValue, double yValue){
         x = xValue;

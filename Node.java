@@ -38,4 +38,10 @@ public class Node {
     public Node getPrevious(){
         return previous;
     }
+
+    public void delete(){
+        data = null;
+        next = null;
+        previous = null;
+    }
 }
