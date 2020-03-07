@@ -2,10 +2,10 @@ import java.util.*;
 import java.io.*;
 public class MyPolygons {
     //Store a doubly linked circular Linked List
-    Node sentinel;
-    Node current;
-    Node tail;
-    int size = 0;
+    private Node sentinel;
+    private Node current;
+    private Node tail;
+    private int size = 0;
 
     public MyPolygons(Polygon first){
         Node n = new Node(first);
@@ -65,26 +65,24 @@ public class MyPolygons {
 
     public static void main(String args[]){
 
+        MyPolygons mp = null;
         try {
             Scanner reader = new Scanner(new FileInputStream("input.txt"));
             boolean b = false;
-            //System.out.println(reader.next());
-            //String s = reader.next();
-
             if (reader.next().equals("P")){
                  b = true;
             }
             int count = 0;
-            MyPolygons mp = null;
+
             while (b) {
                 System.out.println("While");
                 int numOfPoints = reader.nextInt();
                 System.out.println(numOfPoints);
                 Polygon p = new Polygon(numOfPoints);
                 for (int i = 0; i < numOfPoints; i++) {
-                    Point pt = new Point(reader.nextDouble(), reader.nextDouble());
-                    System.out.println(pt);
-                    p.addPoint(pt);
+                    //Point pt = new Point();
+                    //System.out.println(pt);
+                    p.addPoint(reader.nextDouble(), reader.nextDouble());
                 }
                 if (count==0) {
                     mp = new MyPolygons(p);
@@ -102,5 +100,17 @@ public class MyPolygons {
         } catch (Exception e){
             //Exception code
         }
+        System.out.println(mp);
+    }
+
+    @Override
+    public String toString() {
+        String out = "";
+        reset();
+        for (int i=0;i<size;i++){
+            out += current.toString() + current.getArea() + "\n";
+            current = current.getNext();
+        }
+        return out;
     }
 }

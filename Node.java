@@ -44,4 +44,15 @@ public class Node {
         next = null;
         previous = null;
     }
+
+    public double getArea(){
+        return data.area();
+    }
+
+    @Override
+    public String toString() {
+        String out = "";
+        out += data.toString();
+        return out;
+    }
 }

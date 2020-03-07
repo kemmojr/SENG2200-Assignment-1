@@ -9,6 +9,11 @@ public class Point {
         y = yValue;
     }
 
+    public Point(Point p){
+        x = p.getX();
+        y = p.getY();
+    }
+
     public double distance(){
         double distance = Math.sqrt(x*x+y*y);
 
