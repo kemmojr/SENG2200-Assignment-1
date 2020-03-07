@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 public class MyPolygons {
     //Store a doubly linked circular Linked List
     Node sentinel;
@@ -60,5 +61,46 @@ public class MyPolygons {
 
     public void reset(){
         current = sentinel;
+    }
+
+    public static void main(String args[]){
+
+        try {
+            Scanner reader = new Scanner(new FileInputStream("input.txt"));
+            boolean b = false;
+            //System.out.println(reader.next());
+            //String s = reader.next();
+
+            if (reader.next().equals("P")){
+                 b = true;
+            }
+            int count = 0;
+            MyPolygons mp = null;
+            while (b) {
+                System.out.println("While");
+                int numOfPoints = reader.nextInt();
+                System.out.println(numOfPoints);
+                Polygon p = new Polygon(numOfPoints);
+                for (int i = 0; i < numOfPoints; i++) {
+                    Point pt = new Point(reader.nextDouble(), reader.nextDouble());
+                    System.out.println(pt);
+                    p.addPoint(pt);
+                }
+                if (count==0) {
+                    mp = new MyPolygons(p);
+                } else {
+                    mp.prepend(p);
+                }
+                count++;
+                if (reader.next().equals("P")){
+                    continue;
+                } else {
+                    b = false;
+                }
+
+            }
+        } catch (Exception e){
+            //Exception code
+        }
     }
 }
