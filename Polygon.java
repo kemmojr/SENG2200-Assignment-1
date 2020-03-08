@@ -2,6 +2,7 @@ import java.util.*;
 public class Polygon {
 
     private Point[] points;
+    private Point first;
     int numOfPoints = 5, pointCount =0;
 
 
@@ -10,6 +11,10 @@ public class Polygon {
     }
 
     public void addPoint(double x, double y){
+        if (pointCount==0){
+            first = new Point(x,y);
+        }
+
         if ((pointCount-1)>=numOfPoints){
             System.out.println("More points than allocated");
             return;

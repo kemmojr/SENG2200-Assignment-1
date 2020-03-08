@@ -33,8 +33,10 @@ public class MyPolygons {
             sentinel = n;
         } else {
             n.setNext(sentinel);
+            sentinel.setPrevious(n);
             tail.setNext(n);
             n.setPrevious(tail);
+            n.setNext(sentinel);
             sentinel = n;
         }
         size++;
