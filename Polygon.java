@@ -6,7 +6,8 @@ public class Polygon {
     int numOfPoints = 5, pointCount =0;
 
 
-    Polygon(int numOfPoints){
+    Polygon(int numOfP){
+        numOfPoints = numOfP+1;
         points = new Point[numOfPoints];
     }
 
@@ -15,7 +16,10 @@ public class Polygon {
             first = new Point(x,y);
         }
 
-        if ((pointCount-1)>=numOfPoints){
+        if (pointCount==(numOfPoints-1)){
+            points[pointCount] = new Point(first);
+        }
+        else if ((pointCount-1)>=numOfPoints){
             System.out.println("More points than allocated");
             return;
         }
@@ -38,12 +42,15 @@ public class Polygon {
         double tempArea = 0, area =0;
 
         for (int i = 0; i<numOfPoints-2;i++){
+            System.out.println("rep "+i);
             tempArea = ((points[i+1].getX()+points[i].getX())*(points[i+1].getY()-points[i].getY()));
-            tempArea = Math.sqrt(tempArea*tempArea);
+            System.out.println(tempArea);
             area += tempArea;
-            System.out.println("area:"+area);
+            //System.out.println("area:"+tempArea);
         }
+        area = Math.sqrt(area*area);
         area = 0.5*area;
+        System.out.println("area:"+area);
         area *= 100;
         area = Math.round(area);
 

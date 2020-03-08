@@ -25,7 +25,7 @@ public class MyPolygons {
 
     public void prepend(Polygon p){
         Node n = new Node(p);
-        if (size==1){
+        /*if (size==1){
             n.setNext(sentinel);
             n.setPrevious(sentinel);
             sentinel.setNext(n);
@@ -38,7 +38,16 @@ public class MyPolygons {
             n.setPrevious(tail);
             n.setNext(sentinel);
             sentinel = n;
+        }*/
+        if (size==2){
+            return;
         }
+        n.setNext(sentinel);
+        sentinel.setPrevious(n);
+        tail.setNext(n);
+        n.setPrevious(tail);
+        n.setNext(sentinel);
+        sentinel = n;
         size++;
     }
 
