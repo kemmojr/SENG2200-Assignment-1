@@ -38,10 +38,10 @@ public class MyPolygons {
             n.setPrevious(tail);
             n.setNext(sentinel);
             sentinel = n;
-        }*/
+        }
         if (size==2){
             return;
-        }
+        }*/
         n.setNext(sentinel);
         sentinel.setPrevious(n);
         tail.setNext(n);
@@ -77,6 +77,9 @@ public class MyPolygons {
     public static void main(String args[]){
 
         MyPolygons mp = null;
+        File file = new File("input.txt");
+        System.out.println(file.canRead());
+        //Scanner reader = new Scanner(new FileInputStream("input.txt"));
         try {
             Scanner reader = new Scanner(new FileInputStream("input.txt"));
             boolean b = false;
@@ -92,7 +95,8 @@ public class MyPolygons {
                 Polygon p = new Polygon(numOfPoints);
                 for (int i = 0; i < numOfPoints; i++) {
                     //Point pt = new Point();
-                    //System.out.println(pt);
+                    //System.out.println(reader.nextDouble());
+                    System.out.println("i:"+i);
                     p.addPoint(reader.nextDouble(), reader.nextDouble());
                 }
                 if (count==0) {
@@ -101,15 +105,21 @@ public class MyPolygons {
                     mp.prepend(p);
                 }
                 count++;
-                if (reader.next().equals("P")){
-                    continue;
-                } else {
-                    b = false;
+                try{
+                    if (reader.next().equals("P")){
+                        continue;
+                    } else {
+                        b = false;
+                    }
+                } catch (Exception e){
+                    //Do nothing
                 }
+
 
             }
         } catch (Exception e){
             //Exception code
+            System.out.println("Error");
         }
         System.out.println(mp);
     }

@@ -24,7 +24,7 @@ public class Node {
     }
 
     public void setPrevious(Node prev){
-        next = prev;
+        previous = prev;
     }
 
     public void setData(Polygon p){
