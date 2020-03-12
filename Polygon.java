@@ -37,16 +37,17 @@ public class Polygon {
 
     public double area(){
         double tempArea = 0, area =0;
+        finalise();
 
-        for (int i = 0; i<numOfPoints-2;i++){
-            System.out.println("rep "+i);
+        for (int i = 0; i<=numOfPoints-2;i++){
+            //System.out.println("rep "+i);
             tempArea = ((points[i+1].getX()+points[i].getX())*(points[i+1].getY()-points[i].getY()));
-            System.out.println(tempArea);
+            //System.out.println(tempArea);
             area += tempArea;
             //System.out.println("area:"+tempArea);
         }
+        area = area * 0.5;
         area = Math.sqrt(area*area);
-        area = 0.5*area;
         System.out.println("area:"+area);
         area *= 100.0;
         area = Math.round(area);
