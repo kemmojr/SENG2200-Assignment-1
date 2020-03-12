@@ -13,6 +13,12 @@ public class Node {
         data = p;
     }
 
+    public Node(Node n){
+        next = n.getNext();
+        previous = n.getPrevious();
+        data = n.data;
+    }
+
     public Node(Polygon p, Node nxt, Node prev){
         next = nxt;
         previous = prev;

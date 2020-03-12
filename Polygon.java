@@ -11,20 +11,17 @@ public class Polygon {
         points = new Point[numOfPoints];
     }
 
-    public void addPoint(double x, double y){
-        if (pointCount==0){
-            first = new Point(x,y);
-        }
-
+    public void addPoint(double x, double y){// Create a new function called finalise points which takes a complete polygon and replicates the first point into the last
         if (pointCount==(numOfPoints-1)){
-            points[pointCount] = new Point(first);
-        }
-        else if ((pointCount-1)>=numOfPoints){
             System.out.println("More points than allocated");
             return;
         }
         points[pointCount] = new Point(x, y);
         pointCount++;
+    }
+
+    public void finalise(){
+        points[pointCount] = points[0];
     }
 
     public double distance(){
@@ -51,9 +48,8 @@ public class Polygon {
         area = Math.sqrt(area*area);
         area = 0.5*area;
         System.out.println("area:"+area);
-        area *= 100;
+        area *= 100.0;
         area = Math.round(area);
-
         area = area/100.0;
         return area;
 
