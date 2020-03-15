@@ -46,36 +46,6 @@ public class MyPolygons {
 
     }
 
-    public void createdSortedList(double[] list){
-        /*Create a new linkedList by going through the linked list and adding each node to the sorted linked list in reverse sorted order based on the area
-        Node n = null;
-        reset();
-        for (int i=0;i<size;i++){
-            if (current.getArea()==list[i]){
-                n = new Node(current);
-                break;
-            }
-            current = current.getNext();
-        }
-        sentinel2 = n;
-        current2 = n;
-        tail2 = n;
-        n.setNext(n);
-        n.setPrevious(n);
-        Node n1 = null;
-        reset();
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (current.getArea()==list[i]){
-                    n1 = new Node(current);
-                    postpend2(n1);
-                    current = current.getNext();
-                    break;
-                }
-            }
-        }*/
-    }
-
     public void prepend(Polygon p){
         Node n = new Node(p);
         n.setNext(sentinel);
@@ -123,24 +93,45 @@ public class MyPolygons {
         current2 = sentinel2;
     }
 
+    public void setCurrentNext(){
+        current = current.getNext();
+    }
+
+    public void setCurrentPrev(){
+        current = current.getPrevious();
+    }
+
+    private Node getElement(int position){
+        reset();
+        for (int n = 0; n <= position; n++) {
+            if (n==position){
+                return current;
+            } else {
+                setCurrentNext();
+            }
+        }
+        return null;
+    }
+
     public void insertionSort(){
 
 
-        /*
-        for (int i = 1; i < size; ++i) {
-            double key = sort[i];
-            int j = i - 1;
 
-             Move elements of arr[0..i-1], that are
+        for (int i = 1; i < size; ++i) {
+            double key = getElement(i).getArea();
+            int j = i - 1;
+            double jArea = 0.0;
+
+             /*Move elements of arr[0..i-1], that are
                greater than key, to one position ahead
-               of their current position
-            while (j >= 0 && sort[j] > key) {
+               of their current position*/
+            while (j >= 0 && getElement(j).getArea() > key) {
                 sort[j + 1] = sort[j];
                 j = j - 1;
             }
             sort[j + 1] = key;
         }
-        createdSortedList(sort);*/
+
     }
 
     public static void main(String args[]){
@@ -191,7 +182,7 @@ public class MyPolygons {
             System.out.println("Error");
         }
 
-        mp.insertionSort();
+        //mp.insertionSort();
         System.out.println(mp);
     }
 
