@@ -45,6 +45,10 @@ public class Node {
         return previous;
     }
 
+    public Polygon getData(){
+        return data;
+    }
+
     public void delete(){
         data = null;
         next = null;

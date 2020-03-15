@@ -85,6 +85,28 @@ public class MyPolygons {
         size--;
     }
 
+    public void remove(int i){//remove from a position i
+        reset();
+        for (int j = 0; j < size; j++) {
+            if (j==i){
+                //break and remove and do nessecary connections
+                break;
+            } else {
+                setCurrentNext();
+            }
+        }
+
+        Node removing = current;
+        removing.getPrevious().setNext(removing.getNext());
+        removing.getNext().setPrevious(removing.getPrevious());
+        if (removing==sentinel){
+            sentinel = removing.getNext();
+        } else if (removing==tail){
+            tail = removing.getPrevious();
+        }
+        removing.delete();
+    }
+
     public void reset(){
         current = sentinel;
     }
@@ -117,19 +139,30 @@ public class MyPolygons {
 
 
 
+
         for (int i = 1; i < size; ++i) {
-            double key = getElement(i).getArea();
+            //double key = getElement(i).getArea();
+            Node key = getElement(i);
             int j = i - 1;
             double jArea = 0.0;
+            Node insertionPoint = getElement(i+1);
 
              /*Move elements of arr[0..i-1], that are
                greater than key, to one position ahead
                of their current position*/
-            while (j >= 0 && getElement(j).getArea() > key) {
-                sort[j + 1] = sort[j];
+            while (j >= 0 && key.getData().comesBefore(getElement(j).getData())) {
+                //sort[j + 1] = sort[j];
+                Polygon inserting = getElement(j).getData();
+                current = insertionPoint;
+                insert(inserting);
+                remove(j);
                 j = j - 1;
             }
-            sort[j + 1] = key;
+            //sort[j + 1] = key;
+            //insert the key before all the new nodes
+            current = getElement(j+1);
+            insert(key.getData());
+            remove(i);
         }
 
     }
