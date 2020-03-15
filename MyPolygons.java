@@ -87,7 +87,7 @@ public class MyPolygons {
         size++;
     }
 
-    public void postpend(Polygon p){
+    public void append(Polygon p){
         Node n = new Node(p);
         n.setPrevious(tail);
         n.setNext(sentinel);
@@ -97,7 +97,7 @@ public class MyPolygons {
         size++;
     }
 
-    public void postpend2(Node n){
+    public void append2(Node n){
         //Node n = new Node(p);
         n.setPrevious(tail2);
         n.setNext(sentinel2);
@@ -171,7 +171,7 @@ public class MyPolygons {
                 if (count==0) {
                     mp = new MyPolygons(p);
                 } else {
-                    mp.prepend(p);
+                    mp.append(p);
                 }
                 count++;
                 try{
