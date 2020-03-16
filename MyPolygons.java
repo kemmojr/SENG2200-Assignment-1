@@ -6,7 +6,7 @@ public class MyPolygons {
     private Node sentinel, sentinel2;
     private Node current, current2;
     private Node tail, tail2;
-    private int size = 0;
+    private int size = 0, size2 =0;
     private double[] sort = null;
 
     public MyPolygons(Polygon first){
@@ -46,6 +46,19 @@ public class MyPolygons {
 
     }
 
+    public void insert2(Polygon p){
+        Node n = new Node(p);
+        n.setNext(current2);
+        n.setPrevious(current2.getPrevious());
+        current2.setPrevious(n);
+        current2.getPrevious().setNext(n);
+        if (current2==sentinel2){
+            sentinel2 = n;
+        }
+        size2++;
+
+    }
+
     public void prepend(Polygon p){
         Node n = new Node(p);
         n.setNext(sentinel);
@@ -67,13 +80,14 @@ public class MyPolygons {
         size++;
     }
 
-    public void append2(Node n){
-        //Node n = new Node(p);
+    public void append2(Polygon p){
+        Node n = new Node(p);
         n.setPrevious(tail2);
         n.setNext(sentinel2);
         tail2.setNext(n);
         sentinel2.setPrevious(n);
         tail2 = n;
+        size2++;
     }
 
     public void remove(){//remove from the head of the list
@@ -119,8 +133,16 @@ public class MyPolygons {
         current = current.getNext();
     }
 
+    public void setCurrent2Next(){
+        current2 = current2.getNext();
+    }
+
     public void setCurrentPrev(){
         current = current.getPrevious();
+    }
+
+    public void setCurrent2Prev(){
+        current2 = current2.getPrevious();
     }
 
     private Node getElement(int position){
@@ -137,34 +159,49 @@ public class MyPolygons {
 
     public void insertionSort(){
 
+        Node n = new Node(sentinel.getData());
+        sentinel2 = n;
+        current2 = n;
+        tail2 = n;
+        n.setNext(n);
+        n.setPrevious(n);
+        size2++;
 
-
-
-        for (int i = 1; i < size; ++i) {
-            //double key = getElement(i).getArea();
-            Node key = getElement(i);
+        /* int n = arr.length;
+        for (int i = 1; i < n; ++i) {
+            int key = arr[i];
             int j = i - 1;
-            double jArea = 0.0;
-            Node insertionPoint = getElement(i+1);
 
-             /*Move elements of arr[0..i-1], that are
+             Move elements of arr[0..i-1], that are
                greater than key, to one position ahead
-               of their current position*/
-            while (j >= 0 && key.getData().comesBefore(getElement(j).getData())) {
-                //sort[j + 1] = sort[j];
-                Polygon inserting = getElement(j).getData();
-                current = insertionPoint;
-                insert(inserting);
-                remove(j);
-                j = j - 1;
-            }
-            //sort[j + 1] = key;
-            //insert the key before all the new nodes
-            current = getElement(j+1);
-            insert(key.getData());
-            remove(i);
+               of their current position
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
         }
-
+        arr[j + 1] = key;
+    } */
+        reset();
+        setCurrentNext();
+        reset2();
+        Polygon poly = new Polygon(current.getData());
+        poly.comesBefore(current2.getData());
+        for (int i = 1; i < size; i++) {
+            //Loop through all the elements of the unsorted list
+            //Polygon poly = new Polygon(current.getData());
+            for (int j = 0; j <= size2; j++) {
+                //loop through all the elements of the new list until you find a place where the next item goes
+                if (current2.getData()!=null && poly.comesBefore(current2.getData())){
+                    insert2(poly);
+                    break;
+                } else if (j==size2){
+                    append2(poly);
+                    break;
+                }
+                setCurrent2Next();
+            }
+            setCurrentNext();
+        }
     }
 
     public static void main(String args[]){

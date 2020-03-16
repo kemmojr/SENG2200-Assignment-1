@@ -11,6 +11,11 @@ public class Polygon implements ComparePoly {
         points = new Point[numOfPoints];
     }
 
+    Polygon(Polygon p){
+        numOfPoints = p.numOfPoints;
+        points = p.points;
+    }
+
     public void addPoint(double x, double y){// Create a new function called finalise points which takes a complete polygon and replicates the first point into the last
         if (pointCount==(numOfPoints-1)){
             System.out.println("More points than allocated");
