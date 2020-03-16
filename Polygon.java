@@ -13,7 +13,11 @@ public class Polygon implements ComparePoly {
 
     Polygon(Polygon p){
         numOfPoints = p.numOfPoints;
-        points = p.points;
+        points = new Point[numOfPoints];
+        //points = p.points;
+        for (int i = 0; i < p.numOfPoints-1; i++) {
+            points[i] = new Point(p.points[i].getX(),p.points[i].getY());
+        }
     }
 
     public void addPoint(double x, double y){// Create a new function called finalise points which takes a complete polygon and replicates the first point into the last
@@ -27,6 +31,7 @@ public class Polygon implements ComparePoly {
 
     public void finalise(){
         points[pointCount] = points[0];
+
     }
 
     public double distance(){
@@ -53,7 +58,7 @@ public class Polygon implements ComparePoly {
         }
         area = area * 0.5;
         area = Math.sqrt(area*area);
-        System.out.println("area:"+area);
+        //System.out.println("area:"+area);
         area *= 100.0;
         area = Math.round(area);
         area = area/100.0;
@@ -63,9 +68,9 @@ public class Polygon implements ComparePoly {
 
 //boolean comesBefore(Object o)
     public boolean comesBefore(Polygon p){//returns true if this.area() < p.area(). If their area's are within 0.1% then it returns based on distance from the origin
-        double a1 = this.area();
-        double a2 = p.area();
-        double diff = Math.sqrt((a1-a2)*(a1-a2));
+        //double a1 = this.area();
+        //double a2 = p.area();
+        double diff = 1.0;//Math.sqrt((a1-a2)*(a1-a2));
         if (diff<0.1){
             //Work out which has the lower distance
             if (this.distance()<p.distance()){
@@ -73,9 +78,10 @@ public class Polygon implements ComparePoly {
             } else {
                 return false;
             }
-        }else if (this.area()<p.area()){
-            return true;
-        } else {
+        }//else if (this.area()<p.area()){
+            //return true;
+        //}
+        else {
             return false;
         }
     }

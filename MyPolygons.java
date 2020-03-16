@@ -219,14 +219,14 @@ public class MyPolygons {
             int count = 0;
 
             while (b) {
-                System.out.println("While");
+                //System.out.println("While");
                 int numOfPoints = reader.nextInt();
                 System.out.println(numOfPoints);
                 Polygon p = new Polygon(numOfPoints);
                 for (int i = 0; i < numOfPoints; i++) {
                     //Point pt = new Point();
                     //System.out.println(reader.nextDouble());
-                    System.out.println("i:"+i);
+                    //System.out.println("i:"+i);
                     p.addPoint(reader.nextDouble(), reader.nextDouble());
                 }
                 if (count==0) {
@@ -238,11 +238,13 @@ public class MyPolygons {
                 try{
                     if (reader.next().equals("P")){
                         continue;
+                        //if ()
                     } else {
                         b = false;
                     }
                 } catch (Exception e){
                     //Do nothing
+                    break;
                 }
 
 
@@ -252,7 +254,8 @@ public class MyPolygons {
             System.out.println("Error");
         }
 
-        //mp.insertionSort();
+        mp.insertionSort();
+        System.out.println("Sorted");
         System.out.println(mp);
     }
 
