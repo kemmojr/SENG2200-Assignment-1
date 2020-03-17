@@ -2,7 +2,7 @@ import java.util.*;
 public class Polygon implements ComparePoly {
 
     private Point[] points;
-    private Point first;
+    //private Point first;
     int numOfPoints = 5, pointCount =0;
 
 
@@ -15,7 +15,10 @@ public class Polygon implements ComparePoly {
         numOfPoints = p.numOfPoints;
         points = new Point[numOfPoints];
         //points = p.points;
-        for (int i = 0; i < p.numOfPoints-1; i++) {
+        for (int i = 0; i < p.numOfPoints; i++) {
+            if (p.points[i]==null){
+                break;
+            }
             points[i] = new Point(p.points[i].getX(),p.points[i].getY());
         }
     }
