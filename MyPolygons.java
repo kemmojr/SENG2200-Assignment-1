@@ -3,9 +3,12 @@ import java.util.*;
 import java.io.*;
 public class MyPolygons {
     //Store a doubly linked circular Linked List
-    private Node sentinel, sentinel2;
-    private Node current, current2;
-    private Node tail, tail2;
+    private Node sentinel;
+    private Node sentinel2;
+    private Node current;
+    private Node current2;
+    private Node tail;
+    private Node tail2;
     private int size = 0, size2 =0;
     private double[] sort = null;
 
@@ -20,7 +23,7 @@ public class MyPolygons {
     }
 
     public MyPolygons(Node n){
-        sentinel2 = n;
+        //sentinel2 = n;
         current2 = n;
         tail2 = n;
         n.setNext(n);
@@ -157,17 +160,27 @@ public class MyPolygons {
         return null;
     }
 
+    private Node getElement2(int position){
+        current2 = sentinel2;
+        for (int n = 0; n <= position; n++) {
+            if (n==position){
+                return current2;
+            } else {
+                current2 = current2.getNext();
+            }
+        }
+        return null;
+    }
+
     public void insertionSort(){
 
-        Node n = new Node(sentinel.getData());
+        Node n = new Node(sentinel);
         sentinel2 = n;
         current2 = n;
         tail2 = n;
-        n.setNext(n);
-        n.setPrevious(n);
-        size2++;
+        size2=1;
 
-        /* int n = arr.length;
+        /* int n = arr.length; random comment
         for (int i = 1; i < n; ++i) {
             int key = arr[i];
             int j = i - 1;
@@ -181,21 +194,26 @@ public class MyPolygons {
         }
         arr[j + 1] = key;
     } */
-        reset();
-        setCurrentNext();
-        reset2();
+        current = sentinel.getNext();
+        //current = current.getNext();
+        //reset2();
         Polygon poly = new Polygon(current.getData());
-        poly.comesBefore(current2.getData());
+        boolean inserted = false;
         for (int i = 1; i < size; i++) {
             //Loop through all the elements of the unsorted list
-            //Polygon poly = new Polygon(current.getData());
-            for (int j = 0; j <= size2; j++) {
+            inserted = false;
+            if (i!=0){
+                poly = new Polygon(getElement(i).getData());
+            }
+            for (int j = 0; j <= i; j++) {
                 //loop through all the elements of the new list until you find a place where the next item goes
-                if (current2.getData()!=null && poly.comesBefore(current2.getData())){
+                if (poly.comesBefore(getElement2(j).getData())){
                     insert2(poly);
+                    inserted = true;
                     break;
                 } else if (j==size2){
                     append2(poly);
+                    inserted = true;
                     break;
                 }
                 setCurrent2Next();
@@ -254,8 +272,8 @@ public class MyPolygons {
             System.out.println("Error");
         }
 
-        mp.insertionSort();
-        System.out.println("Sorted");
+        //mp.insertionSort();
+        //System.out.println("Sorted");
         System.out.println(mp);
     }
 
@@ -267,12 +285,12 @@ public class MyPolygons {
             out += current.toString() + current.getArea() + "\n";
             current = current.getNext();
         }
-        /*insertionSort();
-        reset2();
+        insertionSort();
+        //reset2();
         for (int i=0;i<size;i++){
-            out += current2.toString() + current2.getArea() + "\n";
-            current2 = current2.getNext();
-        }*/
+            out += getElement2(i).toString() + getElement2(i).getArea() + "\n";
+            //current2 = current2.getNext();
+        }
         return out;
     }
 }

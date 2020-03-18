@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Node {
+public class Node { // Implement a compare method that compares Polygons
     //next & previous pointers of data type polygon and pointer
     //data = new Polygon
     private Polygon data;
