@@ -16,10 +16,11 @@ public class PA1 {
 
         MyPolygons mp = null;
         MyPolygons mpSorted = null;
-        File file = new File("input.txt");
+        File file = new File("test.txt");
 
         try {
-            Scanner reader = new Scanner(new FileInputStream("input.txt"));
+            Scanner reader = new Scanner(new FileInputStream("test.txt"));
+
             boolean b = false;
             if (reader.next().equals("P")){
                 b = true;
@@ -29,11 +30,11 @@ public class PA1 {
             while (b) {
                 //System.out.println("While");
                 int numOfPoints = reader.nextInt();
-                System.out.println(numOfPoints);
+                //System.out.println(numOfPoints);
                 Polygon p = new Polygon(numOfPoints);
                 for (int i = 0; i < numOfPoints; i++) {
                     //Point pt = new Point();
-                    //System.out.println(reader.nextDouble());
+                    System.out.println(reader.nextDouble());
                     //System.out.println("i:"+i);
                     p.addPoint(reader.nextDouble(), reader.nextDouble());
                 }
