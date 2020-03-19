@@ -13,8 +13,21 @@ public class MyPolygons {
         sentinel = n;
         current = n;
         tail = n;
-        n.setNext(n);
-        n.setPrevious(n);
+        size++;
+    }
+
+    public MyPolygons(Node n){
+        sentinel = n;
+        current = n;
+        tail = n;
+        size++;
+    }
+
+    public MyPolygons(MyPolygons mp){
+        mp.reset();
+        sentinel = mp.current;
+        current = mp.current;
+        tail = mp.current;
         size++;
     }
 
@@ -71,6 +84,10 @@ public class MyPolygons {
         current = sentinel;
     }
 
+    public int getSize(){
+        return size;
+    }
+
 
     public void setCurrentNext(){
         current = current.getNext();
@@ -80,16 +97,28 @@ public class MyPolygons {
         current = current.getPrevious();
     }
 
+    private Node getCurrent(){
+        return current;
+    }
+
+    public void insertSorted(MyPolygons mp){//Inserts a node into its correct position with the node being the current of mp to avoid breaking encapsulation
+        reset();
+        for (int i = 0; i < size; i++) {
+            if (mp.current.comesBefore(current)){
+                insert(mp.current.getData());
+                break;
+            } else if (i==size-1){
+                append(mp.current.getData());
+                break;
+            }
+            setCurrentNext();
+        }
+        size++;
+    }
+
 
     public void insertionSort(){
-
-        Node n = new Node(sentinel);
-        //sentinel2 = n;
-        //current2 = n;
-        //tail2 = n;
-        //size2=1;
-
-        /* int n = arr.length; random comment
+        /* int n = arr.length;
         for (int i = 1; i < n; ++i) {
             int key = arr[i];
             int j = i - 1;
@@ -103,10 +132,10 @@ public class MyPolygons {
         }
         arr[j + 1] = key;
     } */
-        current = sentinel.getNext();
+        //current = sentinel.getNext();
         //current = current.getNext();
         //reset2();
-        Polygon poly = new Polygon(current.getData());
+        /*Polygon poly = new Polygon(current.getData());
         boolean inserted = false;
         for (int i = 1; i < size; i++) {
             //Loop through all the elements of the unsorted list
@@ -116,7 +145,7 @@ public class MyPolygons {
             }
             for (int j = 0; j <= i; j++) {
                 //loop through all the elements of the new list until you find a place where the next item goes
-                if (n.comesBefore(current)){
+                n.comesBefore(current)){
                     //insert2(poly);
                     inserted = true;
                     break;
@@ -128,62 +157,7 @@ public class MyPolygons {
                 //setCurrent2Next();
             }
             setCurrentNext();
-        }
-    }
-
-    public static void main(String args[]){
-
-        MyPolygons mp = null;
-        File file = new File("input.txt");
-        System.out.println(file.canRead());
-        //Scanner reader = new Scanner(new FileInputStream("input.txt"));
-        try {
-            Scanner reader = new Scanner(new FileInputStream("input.txt"));
-            boolean b = false;
-            if (reader.next().equals("P")){
-                 b = true;
-            }
-            int count = 0;
-
-            while (b) {
-                //System.out.println("While");
-                int numOfPoints = reader.nextInt();
-                System.out.println(numOfPoints);
-                Polygon p = new Polygon(numOfPoints);
-                for (int i = 0; i < numOfPoints; i++) {
-                    //Point pt = new Point();
-                    //System.out.println(reader.nextDouble());
-                    //System.out.println("i:"+i);
-                    p.addPoint(reader.nextDouble(), reader.nextDouble());
-                }
-                if (count==0) {
-                    mp = new MyPolygons(p);
-                } else {
-                    mp.append(p);
-                }
-                count++;
-                try{
-                    if (reader.next().equals("P")){
-                        continue;
-                        //if ()
-                    } else {
-                        b = false;
-                    }
-                } catch (Exception e){
-                    //Do nothing
-                    break;
-                }
-
-
-            }
-        } catch (Exception e){
-            //Exception code
-            System.out.println("Error");
-        }
-
-        //mp.insertionSort();
-        //System.out.println("Sorted");
-        System.out.println(mp);
+        }*/
     }
 
     @Override

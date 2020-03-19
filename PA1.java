@@ -3,12 +3,21 @@ import java.io.*;
 public class PA1 {
     //Implement all of the main loop and working with the MyPolygons
 
+    public static void insertionSort(MyPolygons full, MyPolygons empty){
+        full.reset();
+        full.setCurrentNext();
+        for (int i = 0; i < full.getSize(); i++) {
+            empty.insertSorted(full);
+            full.setCurrentNext();
+        }
+    }
+
     public static void main(String args[]){
 
         MyPolygons mp = null;
+        MyPolygons mpSorted = null;
         File file = new File("input.txt");
-        System.out.println(file.canRead());
-        //Scanner reader = new Scanner(new FileInputStream("input.txt"));
+
         try {
             Scanner reader = new Scanner(new FileInputStream("input.txt"));
             boolean b = false;
@@ -48,13 +57,17 @@ public class PA1 {
 
 
             }
+            mp.reset();
+            mpSorted = new MyPolygons(mp);
         } catch (Exception e){
             //Exception code
             System.out.println("Error");
         }
 
-        //mp.insertionSort();
-        //System.out.println("Sorted");
+        insertionSort(mp,mpSorted);
+        System.out.println("Unsorted list");
         System.out.println(mp);
+        System.out.println("Sorted list");
+        System.out.println(mpSorted);
     }
 }
