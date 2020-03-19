@@ -4,13 +4,9 @@ import java.io.*;
 public class MyPolygons {
     //Store a doubly linked circular Linked List
     private Node sentinel;
-    private Node sentinel2;
     private Node current;
-    private Node current2;
     private Node tail;
-    private Node tail2;
-    private int size = 0, size2 =0;
-    private double[] sort = null;
+    private int size = 0;
 
     public MyPolygons(Polygon first){
         Node n = new Node(first);
@@ -20,14 +16,6 @@ public class MyPolygons {
         n.setNext(n);
         n.setPrevious(n);
         size++;
-    }
-
-    public MyPolygons(Node n){
-        //sentinel2 = n;
-        current2 = n;
-        tail2 = n;
-        n.setNext(n);
-        n.setPrevious(n);
     }
 
     public MyPolygons(){
@@ -46,19 +34,6 @@ public class MyPolygons {
             sentinel = n;
         }
         size++;
-
-    }
-
-    public void insert2(Polygon p){
-        Node n = new Node(p);
-        n.setNext(current2);
-        n.setPrevious(current2.getPrevious());
-        current2.setPrevious(n);
-        current2.getPrevious().setNext(n);
-        if (current2==sentinel2){
-            sentinel2 = n;
-        }
-        size2++;
 
     }
 
@@ -83,16 +58,6 @@ public class MyPolygons {
         size++;
     }
 
-    public void append2(Polygon p){
-        Node n = new Node(p);
-        n.setPrevious(tail2);
-        n.setNext(sentinel2);
-        tail2.setNext(n);
-        sentinel2.setPrevious(n);
-        tail2 = n;
-        size2++;
-    }
-
     public void remove(){//remove from the head of the list
         Node newSentinel = sentinel.getNext();
         newSentinel.setPrevious(tail);
@@ -102,83 +67,27 @@ public class MyPolygons {
         size--;
     }
 
-    public void remove(int i){//remove from a position i
-        reset();
-        for (int j = 0; j < size; j++) {
-            if (j==i){
-                //break and remove and do nessecary connections
-                break;
-            } else {
-                setCurrentNext();
-            }
-        }
-
-        Node removing = current;
-        removing.getPrevious().setNext(removing.getNext());
-        removing.getNext().setPrevious(removing.getPrevious());
-        if (removing==sentinel){
-            sentinel = removing.getNext();
-        } else if (removing==tail){
-            tail = removing.getPrevious();
-        }
-        removing.delete();
-    }
-
     public void reset(){
         current = sentinel;
     }
 
-    public void reset2(){
-        current2 = sentinel2;
-    }
 
     public void setCurrentNext(){
         current = current.getNext();
-    }
-
-    public void setCurrent2Next(){
-        current2 = current2.getNext();
     }
 
     public void setCurrentPrev(){
         current = current.getPrevious();
     }
 
-    public void setCurrent2Prev(){
-        current2 = current2.getPrevious();
-    }
-
-    private Node getElement(int position){
-        reset();
-        for (int n = 0; n <= position; n++) {
-            if (n==position){
-                return current;
-            } else {
-                setCurrentNext();
-            }
-        }
-        return null;
-    }
-
-    private Node getElement2(int position){
-        current2 = sentinel2;
-        for (int n = 0; n <= position; n++) {
-            if (n==position){
-                return current2;
-            } else {
-                current2 = current2.getNext();
-            }
-        }
-        return null;
-    }
 
     public void insertionSort(){
 
         Node n = new Node(sentinel);
-        sentinel2 = n;
-        current2 = n;
-        tail2 = n;
-        size2=1;
+        //sentinel2 = n;
+        //current2 = n;
+        //tail2 = n;
+        //size2=1;
 
         /* int n = arr.length; random comment
         for (int i = 1; i < n; ++i) {
@@ -203,20 +112,20 @@ public class MyPolygons {
             //Loop through all the elements of the unsorted list
             inserted = false;
             if (i!=0){
-                poly = new Polygon(getElement(i).getData());
+                //poly = new Polygon(getElement(i).getData());
             }
             for (int j = 0; j <= i; j++) {
                 //loop through all the elements of the new list until you find a place where the next item goes
-                if (poly.comesBefore(getElement2(j).getData())){
-                    insert2(poly);
+                if (n.comesBefore(current)){
+                    //insert2(poly);
                     inserted = true;
                     break;
-                } else if (j==size2){
-                    append2(poly);
+                } else if (j==3){
+                    //append2(poly);
                     inserted = true;
                     break;
                 }
-                setCurrent2Next();
+                //setCurrent2Next();
             }
             setCurrentNext();
         }
@@ -285,12 +194,7 @@ public class MyPolygons {
             out += current.toString() + current.getArea() + "\n";
             current = current.getNext();
         }
-        insertionSort();
-        //reset2();
-        for (int i=0;i<size;i++){
-            out += getElement2(i).toString() + getElement2(i).getArea() + "\n";
-            //current2 = current2.getNext();
-        }
+
         return out;
     }
 }

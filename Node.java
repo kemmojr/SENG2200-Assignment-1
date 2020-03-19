@@ -59,6 +59,10 @@ public class Node { // Implement a compare method that compares Polygons
         return data.area();
     }
 
+    public boolean comesBefore(Node n){//returns true if this.area() < p.area()
+        return data.comesBefore(n.getData());
+    }
+
     @Override
     public String toString() {
         String out = "";
