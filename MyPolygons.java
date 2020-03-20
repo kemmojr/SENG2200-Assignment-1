@@ -24,7 +24,7 @@ public class MyPolygons {
     }
 
     public MyPolygons(MyPolygons mp){
-        mp.reset();
+        mp.current = mp.sentinel;
         sentinel = mp.current;
         current = mp.current;
         tail = mp.current;
@@ -80,9 +80,9 @@ public class MyPolygons {
         size--;
     }
 
-    public void reset(){
+    /*public void reset(){
         current = sentinel;
-    }
+    }*/
 
     public int getSize(){
         return size;
@@ -91,18 +91,19 @@ public class MyPolygons {
 
     public void setCurrentNext(){
         current = current.getNext();
+
     }
 
-    public void setCurrentPrev(){
+    /*public void setCurrentPrev(){
         current = current.getPrevious();
-    }
+    }*/
 
-    private Node getCurrent(){
+    public Node getCurrent(){
         return current;
     }
 
     public void insertSorted(MyPolygons mp){//Inserts a node into its correct position with the node being the current of mp to avoid breaking encapsulation
-        reset();
+        current = sentinel;
         for (int i = 0; i < size; i++) {
             if (mp.current.comesBefore(current)){
                 insert(mp.current.getData());
@@ -117,7 +118,7 @@ public class MyPolygons {
     }
 
 
-    public void insertionSort(){
+    public void insertionSort(MyPolygons full){
         /* int n = arr.length;
         for (int i = 1; i < n; ++i) {
             int key = arr[i];
@@ -132,38 +133,20 @@ public class MyPolygons {
         }
         arr[j + 1] = key;
     } */
-        //current = sentinel.getNext();
-        //current = current.getNext();
-        //reset2();
-        /*Polygon poly = new Polygon(current.getData());
-        boolean inserted = false;
-        for (int i = 1; i < size; i++) {
-            //Loop through all the elements of the unsorted list
-            inserted = false;
-            if (i!=0){
-                //poly = new Polygon(getElement(i).getData());
+        full.current = full.sentinel;
+        full.setCurrentNext();
+        for (int i = 0; i < full.getSize(); i++) {
+            for (int j = 0; j < size; j++) {
+                insertSorted(full);
+                full.setCurrentNext();
             }
-            for (int j = 0; j <= i; j++) {
-                //loop through all the elements of the new list until you find a place where the next item goes
-                n.comesBefore(current)){
-                    //insert2(poly);
-                    inserted = true;
-                    break;
-                } else if (j==3){
-                    //append2(poly);
-                    inserted = true;
-                    break;
-                }
-                //setCurrent2Next();
-            }
-            setCurrentNext();
-        }*/
+        }
     }
 
     @Override
     public String toString() {
         String out = "";
-        reset();
+        current = sentinel;
         for (int i=0;i<size;i++){
             out += current.toString() + current.getArea() + "\n";
             current = current.getNext();

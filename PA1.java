@@ -4,68 +4,69 @@ public class PA1 {
     //Implement all of the main loop and working with the MyPolygons
 
     public static void insertionSort(MyPolygons full, MyPolygons empty){
-        full.reset();
-        full.setCurrentNext();
-        for (int i = 0; i < full.getSize(); i++) {
+        empty.insertionSort(full);
+        /*full.reset();
+        full.setCurrentPrev();
+        //final Node crnt = full.getCurrent();
+        //int size = 3;//full.getSize();
+        for (int i = 0; i < 3; i++) {
             empty.insertSorted(full);
             full.setCurrentNext();
-        }
+        }*/
+    }
+
+    public void insertionSorting(MyPolygons full, MyPolygons empty){
+
     }
 
     public static void main(String args[]){
 
         MyPolygons mp = null;
         MyPolygons mpSorted = null;
-        File file = new File("test.txt");
 
-        try {
-            Scanner reader = new Scanner(new FileInputStream("test.txt"));
+        try {//A try/catch statement to import from a file
+            Scanner reader = new Scanner(new FileInputStream("input.txt"));//Scanner reader object to use for stepping through the data in the file
 
-            boolean b = false;
-            if (reader.next().equals("P")){
+            boolean b = false; //A variable to break from the while loop
+            if (reader.next().equals("P")){//If there is a p, meaning another polygon exists, continue looping
                 b = true;
             }
             int count = 0;
 
             while (b) {
-                //System.out.println("While");
-                int numOfPoints = reader.nextInt();
-                //System.out.println(numOfPoints);
-                Polygon p = new Polygon(numOfPoints);
-                for (int i = 0; i < numOfPoints; i++) {
-                    //Point pt = new Point();
-                    System.out.println(reader.nextDouble());
-                    //System.out.println("i:"+i);
-                    p.addPoint(reader.nextDouble(), reader.nextDouble());
+
+                int numOfPoints = reader.nextInt(); //The number of points in the polygon
+                Polygon p = new Polygon(numOfPoints);//creates empty Polygon with correct array size
+                for (int i = 0; i < numOfPoints; i++) {//Loops through and adds the necessary number of points to Polygon
+                    p.addPoint(reader.nextDouble(), reader.nextDouble());//Adds a point with the two x & y co-ordinate values from the file
                 }
                 if (count==0) {
-                    mp = new MyPolygons(p);
+                    mp = new MyPolygons(p);//create a new MyPolygon for storing the Polygons
                 } else {
-                    mp.append(p);
+                    mp.append(p);//Otherwise add the polygon to the LinkedList
                 }
                 count++;
                 try{
-                    if (reader.next().equals("P")){
+                    if (reader.next().equals("P")){//checks if there is another Polygon and if not then break from the while loop
                         continue;
-                        //if ()
                     } else {
                         b = false;
                     }
                 } catch (Exception e){
-                    //Do nothing
+                    //A catch to avoid errors when reading from file
                     break;
                 }
 
 
             }
-            mp.reset();
-            mpSorted = new MyPolygons(mp);
+
+            mpSorted = new MyPolygons(mp);//creates empty MP for putting a sorted LinkedList in
         } catch (Exception e){
-            //Exception code
+            //Exception code for if there is a problem reading from file
             System.out.println("Error");
         }
 
-        insertionSort(mp,mpSorted);
+        //insertionSort(mp,mpSorted);
         System.out.println("Unsorted list");
         System.out.println(mp);
         System.out.println("Sorted list");
