@@ -4,15 +4,13 @@ public class PA1 {
     //Implement all of the main loop and working with the MyPolygons
 
     public static void insertionSort(MyPolygons full, MyPolygons empty){
-        empty.insertionSort(full);
-        /*full.reset();
+        //empty.insertionSort(full);
+        full.reset();
         full.setCurrentPrev();
-        //final Node crnt = full.getCurrent();
-        //int size = 3;//full.getSize();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < full.getSize(); i++) {
             empty.insertSorted(full);
             full.setCurrentNext();
-        }*/
+        }
     }
 
     public void insertionSorting(MyPolygons full, MyPolygons empty){

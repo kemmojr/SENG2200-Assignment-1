@@ -80,9 +80,9 @@ public class MyPolygons {
         size--;
     }
 
-    /*public void reset(){
+    public void reset(){
         current = sentinel;
-    }*/
+    }
 
     public int getSize(){
         return size;
@@ -94,16 +94,16 @@ public class MyPolygons {
 
     }
 
-    /*public void setCurrentPrev(){
+    public void setCurrentPrev(){
         current = current.getPrevious();
-    }*/
+    }
 
     public Node getCurrent(){
         return current;
     }
 
     public void insertSorted(MyPolygons mp){//Inserts a node into its correct position with the node being the current of mp to avoid breaking encapsulation
-        current = sentinel;
+        reset();
         for (int i = 0; i < size; i++) {
             if (mp.current.comesBefore(current)){
                 insert(mp.current.getData());
