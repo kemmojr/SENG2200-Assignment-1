@@ -73,9 +73,10 @@ public class PA1 {
             System.out.println("Error");
         }
 
-        //insertionSort(mp,mpSorted);
+
         System.out.println("Unsorted list");
         System.out.println(mp);
+        insertionSort(mp,mpSorted);
         System.out.println("Sorted list");
         System.out.println(mpSorted);
     }
