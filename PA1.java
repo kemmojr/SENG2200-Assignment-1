@@ -1,3 +1,12 @@
+/*
+PA1.java
+
+Author: Timothy Kemmis
+Std no: c3329386
+SENG2200 assignment 1
+program description: A class to hold the main method and manipulate MyPolygons objects when calling insertion sort.
+*/
+
 import java.util.*;
 import java.io.*;
 public class PA1 {

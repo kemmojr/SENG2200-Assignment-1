@@ -1,17 +1,27 @@
+/*
+Polygon.java
+
+Author: Timothy Kemmis
+Std no: c3329386
+SENG2200 assignment 1
+program description: A polygon class that holds and array of Point objects.
+*/
+
+
 import java.util.*;
 public class Polygon implements ComparePoly {
 
-    private Point[] points;
+    private Point[] points;//Array of all the points
     //private Point first;
     int numOfPoints = 5, pointCount =0;
 
 
-    Polygon(int numOfP){
+    Polygon(int numOfP){//initialises a polygon with an array of specified size
         numOfPoints = numOfP+1;
         points = new Point[numOfPoints];
     }
 
-    Polygon(Polygon p){
+    Polygon(Polygon p){//copy constructor which loops through all the points of one polygon and adds them to the new polygon
         numOfPoints = p.numOfPoints;
         points = new Point[numOfPoints];
         //points = p.points;
@@ -33,12 +43,12 @@ public class Polygon implements ComparePoly {
         pointCount++;
     }
 
-    public void finalise(){
+    public void finalise(){//copies the first point as the last for area calculations
         points[pointCount] = points[0];
 
     }
 
-    public double distance(){
+    public double distance(){//returns the shortest distance from the origin for a polygon
         double dist = 0;
         dist = points[0].distance();
         for (int i = 0; i < pointCount; i++) {
@@ -49,7 +59,7 @@ public class Polygon implements ComparePoly {
         return dist;
     }
 
-    public double area(){
+    public double area(){//calculates the area using the given formula
         double tempArea = 0, area =0;
         finalise();
 
@@ -93,7 +103,7 @@ public class Polygon implements ComparePoly {
 
 
     @Override
-    public String toString() {
+    public String toString() {//toString method that formats correctly
         String out = "[";
         for (int i =0;i<pointCount;i++){
             if (i==pointCount-1){

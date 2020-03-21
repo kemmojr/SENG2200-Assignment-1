@@ -1,4 +1,12 @@
-import java.awt.desktop.SystemSleepEvent;
+/*
+MyPolygons.java
+
+Author: Timothy Kemmis
+Std no: c3329386
+SENG2200 assignment 1
+program description: A MyPolygons class that holds a circular LinkedList of Nodes containing Polygons.
+*/
+
 import java.util.*;
 import java.io.*;
 public class MyPolygons {
@@ -50,6 +58,18 @@ public class MyPolygons {
 
     }
 
+    public void insert(Node n){//Insert a polygon in a node before current
+        n.setNext(current);
+        n.setPrevious(current.getPrevious());
+        current.setPrevious(n);
+        current.getPrevious().setNext(n);
+        if (current==sentinel){
+            sentinel = n;
+        }
+        size++;
+
+    }
+
     public void prepend(Polygon p){//Add a new node at the head of the LL
         Node n = new Node(p);
         n.setNext(sentinel);
@@ -65,6 +85,17 @@ public class MyPolygons {
 
     public void append(Polygon p){//Add a new node at the end of the LL
         Node n = new Node(p);
+        //n.setPrevious(tail);
+        n.setPrevious(sentinel.getPrevious());
+        n.setNext(sentinel);
+        //tail.setNext(n);
+        sentinel.getPrevious().setNext(n);
+        sentinel.setPrevious(n);
+        tail = n;
+        size++;
+    }
+
+    public void append(Node n){//Add a new node at the end of the LL
         //n.setPrevious(tail);
         n.setPrevious(sentinel.getPrevious());
         n.setNext(sentinel);
@@ -112,10 +143,10 @@ public class MyPolygons {
         reset();
         for (int i = 0; i < size; i++) {
             if (mp.current.comesBefore(current)){
-                insert(mp.current.getData());
+                insert(mp.current);
                 break;
             } else if (i==size-1){
-                append(mp.current.getData());
+                append(mp.current);
                 break;
             }
             setCurrentNext();
