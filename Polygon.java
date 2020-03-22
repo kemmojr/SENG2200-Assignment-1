@@ -83,18 +83,29 @@ public class Polygon implements ComparePoly {
     public boolean comesBefore(Polygon p){//returns true if this.area() < p.area(). If their area's are within 0.1% then it returns based on distance from the origin
         double a1 = this.area();
         double a2 = p.area();
+        double percentage = 0.001;
         double diff = Math.sqrt((a1-a2)*(a1-a2));
-        if (diff<0.1){
-            //Work out which has the lower distance
-            if (this.distance()<p.distance()){
-                return true;
-            } else {
-                return false;
+        if (a1<a2){
+            if (diff/a1<percentage){
+                if (this.distance()<p.distance()){
+                    return true;
+                } else {
+                    return false;
+                }
             }
-        }else if (this.area()<p.area()){
-            return true;
+        } else {
+            if (diff/a2<percentage){
+                if (this.distance()<p.distance()){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
-        else {
+
+        if (this.area()<p.area()){
+            return true;
+        } else {
             return false;
         }
     }

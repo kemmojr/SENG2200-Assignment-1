@@ -16,8 +16,7 @@ public class PA1 {
         //empty.insertionSort(full);
         full.reset();
         full.setCurrentNext();
-        int fgs = full.getSize();
-        for (int i = 1; i < fgs; i++) {
+        for (int i = 1; i < full.getSize(); i++) {
             empty.insertSorted(full);
             full.setCurrentNext();
         }
@@ -33,7 +32,7 @@ public class PA1 {
         MyPolygons mpSorted = null;
 
         try {//A try/catch statement to import from a file
-            Scanner reader = new Scanner(new FileInputStream("test.txt"));//Scanner reader object to use for stepping through the data in the file
+            Scanner reader = new Scanner(new FileInputStream("input.txt"));//Scanner reader object to use for stepping through the data in the file
 
             boolean b = false; //A variable to break from the while loop
             if (reader.next().equals("P")){//If there is a p, meaning another polygon exists, continue looping
@@ -77,8 +76,11 @@ public class PA1 {
 
         System.out.println("Unsorted list");
         System.out.println(mp);
+        System.out.println(mp);
         insertionSort(mp,mpSorted);
         System.out.println("Sorted list");
         System.out.println(mpSorted);
+        System.out.println(mp);
+
     }
 }

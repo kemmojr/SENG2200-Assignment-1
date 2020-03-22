@@ -23,8 +23,8 @@ public class Node {
     }
 
     public Node(Node n){//Copy constructor
-        next = n.getNext();
-        previous = n.getPrevious();
+        next = this;
+        previous = this;
         data = n.data;
     }
 
