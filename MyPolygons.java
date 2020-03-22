@@ -33,9 +33,13 @@ public class MyPolygons {
 
     public MyPolygons(MyPolygons mp){//Creates a MyPolygons object with one node from a MyPolygons taking the first node of MyPolygons
         mp.current = mp.sentinel;
-        sentinel = mp.current;
+        Node n = new Node(mp.current);
+        sentinel = n;
+        current = n;
+        tail = n;
+        /*sentinel = mp.current;
         current = mp.current;
-        tail = mp.current;
+        tail = mp.current;*/
         size++;
     }
 
@@ -61,8 +65,8 @@ public class MyPolygons {
     public void insert(Node n){//Insert a polygon in a node before current
         n.setNext(current);
         n.setPrevious(current.getPrevious());
-        current.setPrevious(n);
         current.getPrevious().setNext(n);
+        current.setPrevious(n);
         if (current==sentinel){
             sentinel = n;
         }
@@ -127,7 +131,10 @@ public class MyPolygons {
 
 
     public void setCurrentNext(){
-        current = current.getNext();
+        System.out.println("insetcur: " + current.toString());
+        Node tCurr = current.getNext();
+        current = tCurr;
+        System.out.println("outSetCur: " + current.toString());
 
     }
 
@@ -141,17 +148,22 @@ public class MyPolygons {
 
     public void insertSorted(MyPolygons mp){//Inserts a node into its correct position with the node being the current of mp to avoid breaking encapsulation
         reset();
+        System.out.println("inMPs insSortd: " + mp.current.toString() + ": " + mp.current.getArea() );
         for (int i = 0; i < size; i++) {
+            System.out.println("curr: " +
+                    current.toString() +
+                    ": " + current.getArea() );
             if (mp.current.comesBefore(current)){
                 insert(mp.current);
+                System.out.println("yes " + size);
                 break;
-            } else if (i==size-1){
+            } else if (i==(size-1)){
                 append(mp.current);
                 break;
             }
             setCurrentNext();
         }
-        size++;
+        System.out.println("outMPs insSortd: " + mp.current.toString() + ": " + mp.current.getArea() );
     }
 
 

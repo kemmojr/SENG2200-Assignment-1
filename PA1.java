@@ -15,8 +15,9 @@ public class PA1 {
     public static void insertionSort(MyPolygons full, MyPolygons empty){
         //empty.insertionSort(full);
         full.reset();
-        full.setCurrentPrev();
-        for (int i = 0; i < full.getSize(); i++) {
+        full.setCurrentNext();
+        int fgs = full.getSize();
+        for (int i = 1; i < fgs; i++) {
             empty.insertSorted(full);
             full.setCurrentNext();
         }
@@ -32,7 +33,7 @@ public class PA1 {
         MyPolygons mpSorted = null;
 
         try {//A try/catch statement to import from a file
-            Scanner reader = new Scanner(new FileInputStream("input.txt"));//Scanner reader object to use for stepping through the data in the file
+            Scanner reader = new Scanner(new FileInputStream("test.txt"));//Scanner reader object to use for stepping through the data in the file
 
             boolean b = false; //A variable to break from the while loop
             if (reader.next().equals("P")){//If there is a p, meaning another polygon exists, continue looping
