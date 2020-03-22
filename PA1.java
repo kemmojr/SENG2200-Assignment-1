@@ -76,11 +76,10 @@ public class PA1 {
 
         System.out.println("Unsorted list");
         System.out.println(mp);
-        System.out.println(mp);
         insertionSort(mp,mpSorted);
         System.out.println("Sorted list");
         System.out.println(mpSorted);
-        System.out.println(mp);
+
 
     }
 }

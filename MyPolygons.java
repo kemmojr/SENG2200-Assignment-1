@@ -32,8 +32,8 @@ public class MyPolygons {
     }
 
     public MyPolygons(MyPolygons mp){//Creates a MyPolygons object with one node from a MyPolygons taking the first node of MyPolygons
-        mp.current = mp.sentinel;
-        Node n = new Node(mp.current);
+        //mp.current = mp.sentinel;
+        Node n = new Node(mp.sentinel);
         sentinel = n;
         current = n;
         tail = n;
@@ -64,6 +64,7 @@ public class MyPolygons {
 
     public void insert(Node n){//Insert a polygon in a node before current
         Node stepper = current;
+        n = new Node(n);
         /*n.setNext(current);
         n.setPrevious(current.getPrevious());
         current.getPrevious().setNext(n);
@@ -162,7 +163,8 @@ public class MyPolygons {
                     current.toString() +
                     ": " + current.getArea() );*/
             if (mp.current.comesBefore(current)){
-                insert(mp.current);
+                Node insert = mp.current;
+                insert(insert);
                 //System.out.println("yes " + size);
                 break;
             } else if (i==(size-1)){
