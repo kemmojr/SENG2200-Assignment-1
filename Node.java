@@ -11,7 +11,6 @@ import java.util.*;
 
 public class Node {
     //next & previous pointers of data type polygon and pointer
-    //data = new Polygon
     private Polygon data;
     private Node next;
     private Node previous;
@@ -42,10 +41,6 @@ public class Node {
         previous = prev;
     }
 
-    /*public void setData(Polygon p){
-        data = p;
-    }*/
-
     public Node getNext(){
         return next;
     }
@@ -53,10 +48,6 @@ public class Node {
     public Node getPrevious(){
         return previous;
     }
-
-    /*public Polygon getData(){
-        return data;
-    }*/
 
     public void delete(){//deletes a node (setting the data to null)
         data = null;

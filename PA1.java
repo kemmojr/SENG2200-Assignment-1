@@ -13,17 +13,12 @@ public class PA1 {
     //Implement all of the main loop and working with the MyPolygons
 
     public static void insertionSort(MyPolygons full, MyPolygons empty){
-        //empty.insertionSort(full);
         full.reset();
         full.setCurrentNext();
         for (int i = 1; i < full.getSize(); i++) {
             empty.insertSorted(full);
             full.setCurrentNext();
         }
-    }
-
-    public void insertionSorting(MyPolygons full, MyPolygons empty){
-
     }
 
     public static void main(String args[]){

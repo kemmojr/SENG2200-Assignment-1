@@ -12,8 +12,7 @@ import java.util.*;
 public class Polygon implements ComparePoly {
 
     private Point[] points;//Array of all the points
-    //private Point first;
-    int numOfPoints = 5, pointCount =0;
+    int numOfPoints, pointCount =0;
 
 
     Polygon(int numOfP){//initialises a polygon with an array of specified size
@@ -64,15 +63,11 @@ public class Polygon implements ComparePoly {
         finalise();
 
         for (int i = 0; i<=numOfPoints-2;i++){
-            //System.out.println("rep "+i);
             tempArea = ((points[i+1].getX()+points[i].getX())*(points[i+1].getY()-points[i].getY()));
-            //System.out.println(tempArea);
             area += tempArea;
-            //System.out.println("area:"+tempArea);
         }
         area = area * 0.5;
         area = Math.sqrt(area*area);
-        //System.out.println("area:"+area);
         area *= 100.0;
         area = Math.round(area);
         area = area/100.0;

@@ -7,7 +7,6 @@ SENG2200 assignment 1
 program description: A Point class that stores an x and y coordinate as double type
 */
 
-import java.util.*;
 import java.lang.Math;
 public class Point {
     private double x;
